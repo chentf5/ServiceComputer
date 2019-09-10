@@ -279,11 +279,7 @@ func TestReverse(t *testing.T) {
 $ go get github.com/Go-zh/tour/gotour
 $ tour
 ```
-
-![](img/16.png)
-
 最后目录如下
-
+![](img/16.png)
 运行tour
-
 ![](img/15.png)
