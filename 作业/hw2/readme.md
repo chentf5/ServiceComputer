@@ -279,4 +279,4 @@ func TestReverse(t *testing.T) {
 $ go get github.com/Go-zh/tour/gotour
 $ tour
 ```
-![](img/15.png)
+![](img/15.PNG)
