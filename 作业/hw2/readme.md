@@ -1,14 +1,20 @@
-### GO在window10环境下的安装&使用
+### GO在windows10环境下&CentOs7下的安装&使用
 
 #### 一、安装
 
+#### windows10下
+
 - 环境window10
+
 - 下载：https://dl.google.com/go/go1.13.windows-amd64.msi
+
 - 直接按照指引安装，安装路径，可以选择默认或自定义，但自定义待会需要自行配置环境变量，然后就可以完成。
+
 - 检验是否成功安装，打开cmd，`C:\..\..> go version`,显示
 
     ![](img/6.png)
     成功安装
+    
 - 关于环境变量的配置
     - GOROOT环境变量配置
     直接搜索编辑系统环境变量，点击右下角环境变量，新建，名字为GOROOT，值为GO的安装路径，如果安装路径默认为C盘，则可以不设置。
@@ -71,7 +77,95 @@
     ![](img/10.PNG)
 
     接下来就可以在工作空间下开始使用go了。
-#### 二、第一个程序
+#### CentOs下
+
+- centos7（virtualbox下虚拟机）
+
+- 进入终端,命令行操作安装
+
+1. 下载安装包，一般第二个源会被ben掉
+
+   ```
+   wget https://studygolang.com/dl/golang/go1.6.linux-amd64.tar.gz
+   
+   或
+   
+   wget https://dl.google.com/go/go1.12.5.linux-amd64.tar.gz
+   ```
+
+   
+
+2. 解压到 /usr/local文件夹下
+
+   ```
+   tar -zxf go1.6.linux-amd64.tar.gz -C /usr/local/ 
+   ```
+
+3. 配置环境变量
+
+   ```
+   //1.以管理员身份打开/etc/profile文件,直接输入命令就可打开
+   $ sudo gedit /etc/profile
+   //2. 打开文件后在文件最末行添加上下面几行
+   
+   export GOROOT=/usr/local/go #设置为go安装的路径
+   export GOPATH=$HOME/go #默认安装包的路径,也就是你要将代码创建在哪里的位置
+   export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+   
+   //3.保存关闭后需要更新profile文件
+   $ source /etc/profile
+   //提示，最好重启系统，否则会出现一些奇奇怪怪的bug，被坑了好久😭
+   ```
+
+   ![](img/13.png)
+
+4. 检查是否安装成功
+
+   ```
+   $ go version
+   //输出
+   $ go version go1.6 linux/amd64
+   //成功
+   //还可以
+   $ go env
+   //检查环境变量是否被修改
+   ```
+
+
+
+
+
+---
+
+***程序实践方面centos和Windows基本一致，下面以windows为例，主要是一些命令不同***
+
+---
+
+
+
+#### 二、安装go的一些工具
+
+这次会使用vscode进行代码编写，需要在vscode安装go的依赖，创建一个go文件后，会自动提示需要安装，但是一些网站连不上。我们需要手动安装。
+
+1. 下载源代码到本地
+
+   ```
+   # 创建文件夹
+   mkdir $GOPATH/src/golang.org/x/
+   # 下载源码
+   go get -d github.com/golang/tools
+   # copy 
+   cp $GOPATH/src/github.com/golang/tools $GOPATH/src/golang.org/x/ -rf
+   2、安装工具包
+   
+   $ go install golang.org/x/tools/go/buildutil
+   退出 vscode，再进入，按提示安装！
+   ```
+
+   
+
+#### 三、第一个程序
+
 新建目录 src\github.com\chentf5\hello，进入hello，新建hello.go 文件 
 ```
 package main
@@ -106,7 +200,7 @@ go install
 
 完成第一个程序
 
-#### 三、第一个包
+#### 四、第一个包
 - 接下来编写一个库并让hello程序使用它
 - 创建目录 src/github.com/user/stringutil，进入目录
 - 创建文件stringutil.go
@@ -179,4 +273,18 @@ func TestReverse(t *testing.T) {
 成功运行
 ![](img/12.PNG)
 
-#### 远程包
+#### 五、安装运行GO tour
+
+```
+$ go get github.com/Go-zh/tour/gotour
+$ gotour
+```
+
+![](img/14.png)
+
+最后目录如下
+
+运行gotour
+
+![](img/15.png)
+
