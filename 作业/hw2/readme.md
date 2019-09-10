@@ -277,14 +277,13 @@ func TestReverse(t *testing.T) {
 
 ```
 $ go get github.com/Go-zh/tour/gotour
-$ gotour
+$ tour
 ```
 
-![](img/14.png)
+![](img/16.png)
 
 最后目录如下
 
-运行gotour
+运行tour
 
 ![](img/15.png)
-
